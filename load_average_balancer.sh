@@ -5,10 +5,11 @@ function usage() {
 }
 
 # Parse arguments
-while getopts "d:t:" opt; do
+while getopts "d:t:h" opt; do
   case $opt in
     d) max_delay=$OPTARG ;;
     t) load_threshold=$OPTARG ;;
+    h) usage ;;
     *) usage ;;
   esac
 done
