@@ -1,29 +1,33 @@
 #!/bin/zsh
+function usage() {
+    echo "Usage: $0 -d <max_delay_seconds> -t <load_threshold>" >&2
+    exit 1
+}
 
 # Parse arguments
 while getopts "d:t:" opt; do
   case $opt in
     d) max_delay=$OPTARG ;;
     t) load_threshold=$OPTARG ;;
-    *) echo "Usage: $0 -d <max_delay_seconds> -t <load_threshold>" >&2; exit 1 ;;
+    *) usage ;;
   esac
 done
 
 # Validate arguments
 if [[ -z "$max_delay" ]] || [[ -z "$load_threshold" ]]; then
   echo "Error: Both -d and -t arguments are required" >&2
-  exit 1
+  usage
 fi
 
 if ! [[ "$max_delay" =~ ^[0-9]+$ ]] || (( max_delay <= 0 )); then
   echo "Error: max_delay must be a positive integer" >&2
-  exit 1
+  usage
 fi
 
 if ! [[ "$load_threshold" =~ ^[0-9]*\.?[0-9]+$ ]] || \
    (( $(echo "$load_threshold <= 0 || $load_threshold > 1" | bc -l) )); then
   echo "Error: load_threshold must be between 0 and 1" >&2
-  exit 1
+  usage
 fi
 
 # Get number of CPU cores
