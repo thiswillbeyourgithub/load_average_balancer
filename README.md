@@ -20,6 +20,8 @@ This script was created to prevent restic backups from running during periods of
 python3 load_average_balancer.py -d <max_delay_seconds> -t <load_threshold>
 ```
 
+The Python version provides the same functionality as the shell script but uses Python's psutil library for system monitoring. It may be more portable across different operating systems.
+
 ### Arguments
 
 - `-d <max_delay_seconds>`: Maximum time to wait in seconds before allowing the backup to proceed
@@ -56,8 +58,9 @@ python3 load_average_balancer.py -d 3600 -t 0.8 && restic backup /path/to/backup
 - Standard Unix utilities (uptime, nproc)
 
 ### Python Version
-- Python 3
+- Python 3.6 or higher
 - psutil package (install with `pip install psutil`)
+- Compatible with Linux, macOS, and other Unix-like systems
 
 ## Exit Codes
 
