@@ -34,12 +34,12 @@ def load_average_balancer():
         
         # Compare with the effective threshold
         if load_15 < effective_threshold:
-            os.exit(0)
+            sys.exit(0)
         
         # Check if the time limit has been reached
         elapsed_seconds = time.time() - start_time
         if elapsed_seconds >= max_delay:
-            os.exit(0)
+            sys.exit(0)
         
         # Wait for 1 minute
         time.sleep(60)
