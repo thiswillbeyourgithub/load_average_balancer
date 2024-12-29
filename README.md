@@ -10,8 +10,14 @@ This script was created to prevent restic backups from running during periods of
 
 ## Usage
 
+### Shell Version
 ```bash
 ./load_average_balancer.sh -d <max_delay_seconds> -t <load_threshold>
+```
+
+### Python Version
+```bash
+python3 load_average_balancer.py -d <max_delay_seconds> -t <load_threshold>
 ```
 
 ### Arguments
@@ -30,17 +36,28 @@ To wait up to 1 hour for the load to drop below 80% of available CPU cores:
 
 ### Integration with restic
 
+#### Shell Version
 Add this script before your restic backup command:
 
 ```bash
 ./load_average_balancer.sh -d 3600 -t 0.8 && restic backup /path/to/backup
 ```
 
+#### Python Version
+```bash
+python3 load_average_balancer.py -d 3600 -t 0.8 && restic backup /path/to/backup
+```
+
 ## Requirements
 
+### Shell Version
 - zsh shell
 - bc (basic calculator)
 - Standard Unix utilities (uptime, nproc)
+
+### Python Version
+- Python 3
+- psutil package (install with `pip install psutil`)
 
 ## Exit Codes
 
